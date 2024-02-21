@@ -3,9 +3,11 @@ const express = require('express');
 const app = express();
 const PORT = 5000 || process.env.PORT;
 const db = require('./database/db.js');
+const bodyParser = require("body-parser")
 db(); // Connecting to database
 
-
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
 
 // Set view engine
 app.set('view engine', 'ejs');
