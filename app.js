@@ -3,8 +3,10 @@ const express = require('express');
 const app = express();
 const PORT = 5000 || process.env.PORT;
 
-app.set('view', 'engine');
+// Set view engine
+app.set('view engine', 'ejs');
 
+// Routes
 app.use(require('./routes/main.js'));
 
 app.listen(PORT, () => {
