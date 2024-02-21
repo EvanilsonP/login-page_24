@@ -6,6 +6,9 @@ const PORT = 5000 || process.env.PORT;
 // Set view engine
 app.set('view engine', 'ejs');
 
+// Static file
+app.use(express.static("public"));
+
 // Routes
 app.use(require('./routes/main.js'));
 
