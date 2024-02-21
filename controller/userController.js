@@ -1,4 +1,5 @@
 const User = require('../models/User.js');
+const bcrypt = require('bcrypt');
 
 
 const loginPage =  (req, res) => {
@@ -19,8 +20,18 @@ const createUser = async (req, res) => {
 
     try {
         const { username, password } = req.body;
-        const user = await User.create({ username, password });
-        res.redirect('home');
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // Check if the username already exists in the database
+        const existingUser = await User.findOne({ username });
+        if(existingUser) {
+            res.send('User already exists. Please choose a different username.');
+            
+        } else {
+            const user = await User.create({ username, password: hashedPassword });
+            console.log(user);
+            res.redirect('home');
+        }
     } 
 
     catch (error) {
