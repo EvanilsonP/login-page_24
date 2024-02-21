@@ -2,6 +2,10 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const PORT = 5000 || process.env.PORT;
+const db = require('./database/db.js');
+db(); // Connecting to database
+
+
 
 // Set view engine
 app.set('view engine', 'ejs');
