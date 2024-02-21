@@ -1,0 +1,21 @@
+{
+  "name": "login-page-by-myself",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "mongoose": "^8.1.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3"
+  }
+}
