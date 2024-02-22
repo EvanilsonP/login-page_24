@@ -39,5 +39,25 @@ const createUser = async (req, res) => {
     };
 };
 
+const userLogin = async (req, res) => {
 
-module.exports = { loginPage, signupPage, homePage, createUser };
+    try {
+        const { username, password } = req.body;
+        const user = await User.findOne({ username });
+
+        if(!user) return res.status(401).send('User not found.');
+
+        const comparingPasswords = await bcrypt.compare(password, user.password);
+
+        if(!comparingPasswords) return res.status(401).send('Invalid password.');
+        res.redirect('home');
+
+    } 
+
+    catch (error) {
+        console.log(error);
+    }
+};
+
+
+module.exports = { loginPage, signupPage, homePage, createUser, userLogin };
