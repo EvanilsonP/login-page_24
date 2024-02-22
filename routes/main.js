@@ -10,6 +10,7 @@ router.get('/home', controller.homePage);
 router.post('/signup', controller.createUser);
 router.post('/login', controller.userLogin);
 router.get('/dashboard', authMiddleware, controller.dashboard);
+router.get('/logout', controller.logout);
 
 
 module.exports = router;

@@ -55,7 +55,9 @@ const createUser = async (req, res) => {
             const user = await User.create({ username, password: hashedPassword });
             console.log(user);
             res.redirect('home');
+            
         }
+
     } 
 
     catch (error) {
@@ -90,7 +92,8 @@ const userLogin = async (req, res) => {
 
 // Logging out
 const logout = (req, res) => {
+    res.clearCookie('token');
+    res.redirect('/');
+};  
 
-};
-
-module.exports = { loginPage, signupPage, homePage, createUser, userLogin, dashboard, authMiddleware };
+module.exports = { loginPage, signupPage, homePage, createUser, userLogin, dashboard, authMiddleware, logout };
