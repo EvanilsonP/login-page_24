@@ -62,9 +62,9 @@ const userLogin = async (req, res) => {
         const comparingPasswords = await bcrypt.compare(password, user.password);
 
         if(!comparingPasswords) return res.status(401).send('Invalid password.');
-        res.redirect('home');
 
-        const token = jwt.sign({  }, jwtSecret);
+        // Saving token
+        const token = jwt.sign({ userId: user._id}, jwtSecret);
         res.cookie('token', token, { httpOnly: true });
         res.redirect('/dashboard');
 
