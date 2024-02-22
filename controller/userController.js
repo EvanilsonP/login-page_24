@@ -88,5 +88,9 @@ const userLogin = async (req, res) => {
     };
 };
 
+// Logging out
+const logout = (req, res) => {
+
+};
 
 module.exports = { loginPage, signupPage, homePage, createUser, userLogin, dashboard, authMiddleware };

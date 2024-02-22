@@ -61,3 +61,24 @@ h2 {
   p {
     margin-top: 15px;
   }
+
+  .header__nav {
+    justify-content: center;
+    display: flex;
+    grid-area: menu;
+  }
+
+  .header__nav ul li a {
+    font-size: 25px;
+    background-color: white;
+    margin-top: 10px;
+    text-decoration: none;
+  }
+
+  .header__nav ul li a:hover {
+    color: red;
+  }
+
+  ul {
+    list-style-type: none;
+}
