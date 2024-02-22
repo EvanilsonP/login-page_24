@@ -4,9 +4,22 @@ const jwt = require('jsonwebtoken');
 
 const jwtSecret = process.env.JWT;
 
-const authMiddleware = (req, res) => {
-
-};
+// Check authentication / login
+const authMiddleware = (req, res, next ) => {
+    const token = req.cookies.token;
+  
+    if(!token) {
+      return res.status(401).send('Unauthorized');
+    }
+  
+    try {
+      const decoded = jwt.verify(token, jwtSecret);
+      req.userId = decoded.userId;
+      next();
+    } catch(error) {
+      res.status(401).json( { message: 'Unauthorized'} );
+    }
+  }
 
 
 const loginPage =  (req, res) => {
@@ -50,7 +63,7 @@ const createUser = async (req, res) => {
     };
 };
 
-
+// Login
 const userLogin = async (req, res) => {
 
     try {
@@ -76,4 +89,4 @@ const userLogin = async (req, res) => {
 };
 
 
-module.exports = { loginPage, signupPage, homePage, createUser, userLogin, dashboard };
+module.exports = { loginPage, signupPage, homePage, createUser, userLogin, dashboard, authMiddleware };
