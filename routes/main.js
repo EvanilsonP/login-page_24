@@ -8,6 +8,7 @@ router.get('/signup', controller.signupPage);
 router.get('/home', controller.homePage);
 router.post('/signup', controller.createUser);
 router.post('/login', controller.userLogin);
+router.get('/dashboard', controller.dashboard);
 
 
 module.exports = router;

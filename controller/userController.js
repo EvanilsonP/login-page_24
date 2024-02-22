@@ -1,5 +1,12 @@
 const User = require('../models/User.js');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
+const jwtSecret = process.env.JWT;
+
+const authMiddleware = (req, res) => {
+
+};
 
 
 const loginPage =  (req, res) => {
@@ -13,6 +20,10 @@ const signupPage = (req, res) => {
 // Render home page after signing up
 const homePage = (req, res) => {
     res.render('home');
+};
+
+const dashboard = (req, res) => {
+    res.render('dashboard');
 };
 
 // Register / Signup - Create user
@@ -39,6 +50,7 @@ const createUser = async (req, res) => {
     };
 };
 
+
 const userLogin = async (req, res) => {
 
     try {
@@ -52,12 +64,16 @@ const userLogin = async (req, res) => {
         if(!comparingPasswords) return res.status(401).send('Invalid password.');
         res.redirect('home');
 
+        const token = jwt.sign({  }, jwtSecret);
+        res.cookie('token', token, { httpOnly: true });
+        res.redirect('/dashboard');
+
     } 
 
     catch (error) {
         console.log(error);
-    }
+    };
 };
 
 
-module.exports = { loginPage, signupPage, homePage, createUser, userLogin };
+module.exports = { loginPage, signupPage, homePage, createUser, userLogin, dashboard };
